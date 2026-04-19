@@ -3,51 +3,16 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>GT26 Maintenance Planner - Professional</title>
+    <title>GT26 Maintenance Planner - Data Link</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Chakra+Petch:wght@300;400;600;700&display=swap');
-        
-        body { 
-            background-color: #0f172a; 
-            font-family: 'Chakra Petch', sans-serif; 
-            color: #e2e8f0; 
-            min-height: 100vh;
-        }
-
-        .glass-card { 
-            background: rgba(30, 41, 59, 0.7); 
-            backdrop-filter: blur(12px); 
-            border-radius: 1.25rem; 
-            border: 1px solid rgba(255, 255, 255, 0.1); 
-            transition: transform 0.3s ease;
-        }
-
-        .glass-card:hover {
-            transform: translateY(-5px);
-        }
-
-        .input-field { 
-            background: rgba(15, 23, 42, 0.8); 
-            border: 1px solid rgba(255, 255, 255, 0.1); 
-            color: white; 
-            transition: all 0.3s; 
-            text-align: center; 
-        }
-
-        .input-field:focus { 
-            border-color: #3b82f6; 
-            box-shadow: 0 0 0 2px rgba(59, 130, 246, 0.3); 
-            outline: none; 
-        }
-
-        /* สำหรับ Chrome, Safari, Edge, Opera */
-        input::-webkit-outer-spin-button,
-        input::-webkit-inner-spin-button {
-            -webkit-appearance: none;
-            margin: 0;
-        }
+        body { background-color: #0f172a; font-family: 'Chakra Petch', sans-serif; color: #e2e8f0; min-height: 100vh; }
+        .glass-card { background: rgba(30, 41, 59, 0.7); backdrop-filter: blur(12px); border-radius: 1.25rem; border: 1px solid rgba(255, 255, 255, 0.1); transition: all 0.3s; }
+        .input-field { background: rgba(15, 23, 42, 0.8); border: 1px solid rgba(255, 255, 255, 0.1); color: white; transition: all 0.3s; text-align: center; }
+        .input-field:focus { border-color: #3b82f6; box-shadow: 0 0 0 2px rgba(59, 130, 246, 0.3); outline: none; }
+        input::-webkit-outer-spin-button, input::-webkit-inner-spin-button { -webkit-appearance: none; margin: 0; }
     </style>
 </head>
 <body class="p-4 md:p-10">
@@ -55,19 +20,15 @@
     <div class="max-w-6xl mx-auto">
         <header class="mb-10 flex flex-col md:flex-row justify-between items-center gap-6">
             <div class="text-center md:text-left">
-                <h1 class="text-3xl font-bold bg-gradient-to-r from-blue-400 to-emerald-400 bg-clip-text text-transparent">
-                    GT26 MAINTENANCE DATABASE
-                </h1>
+                <h1 class="text-3xl font-bold bg-gradient-to-r from-blue-400 to-emerald-400 bg-clip-text text-transparent uppercase">GT26 Maintenance Database</h1>
                 <p class="text-slate-400">ระบบบันทึกและพยากรณ์แผนซ่อมบำรุงแม่นยำรายวัน</p>
             </div>
-            
             <div class="flex gap-3">
                 <button onclick="window.location.href='index2.html'" class="bg-emerald-600/20 hover:bg-emerald-600/40 text-emerald-400 border border-emerald-500/50 font-semibold py-2.5 px-6 rounded-xl transition-all flex items-center shadow-lg">
                     <i class="fas fa-clipboard-list mr-2"></i> รายงานการซ่อมบำรุง
                 </button>
-
                 <button onclick="openGoogleSheet()" class="bg-blue-600/20 hover:bg-blue-600/40 text-blue-400 border border-blue-500/50 font-semibold py-2.5 px-6 rounded-xl transition-all flex items-center shadow-lg">
-                    <i class="fas fa-table mr-2"></i> Google Sheets
+                    <i class="fas fa-table mr-2"></i> ตรวจสอบ Google Sheets
                 </button>
             </div>
         </header>
@@ -94,96 +55,68 @@
             </div>
         </div>
 
-        <h2 class="text-lg font-semibold mb-4 text-blue-400">
-            <i class="fas fa-calendar-alt mr-2"></i>พยากรณ์รอบการทำงาน (Next Maintenance Schedule)
-        </h2>
-        
+        <h2 class="text-lg font-semibold mb-4 text-blue-400 uppercase tracking-widest"><i class="fas fa-calendar-alt mr-2"></i>พยากรณ์รอบปัจจุบัน (Next Cycle)</h2>
         <div id="results" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
             <div id="card_typeA1" class="glass-card p-5 border-l-4 border-emerald-500">
-                <h3 class="text-emerald-400 font-bold text-sm uppercase">TYPE A1 ( -- )</h3>
+                <h3 class="text-emerald-400 font-bold text-sm">TYPE A1</h3>
                 <div id="typeA1_days" class="text-2xl font-bold text-white my-2">-- วัน</div>
-                <div class="space-y-1">
-                    <div id="typeA1_start" class="text-[11px] text-slate-300">เริ่ม: -</div>
-                    <div id="typeA1_finish" class="text-[11px] text-emerald-300">เสร็จ: -</div>
-                </div>
+                <div class="space-y-1"><div id="typeA1_start" class="text-[11px] text-slate-300">เริ่ม: -</div><div id="typeA1_finish" class="text-[11px] text-emerald-300">เสร็จ: -</div></div>
             </div>
-
             <div id="card_typeB" class="glass-card p-5 border-l-4 border-amber-500">
-                <h3 class="text-amber-400 font-bold text-sm uppercase">TYPE B ( -- )</h3>
+                <h3 class="text-amber-400 font-bold text-sm">TYPE B</h3>
                 <div id="typeB_days" class="text-2xl font-bold text-white my-2">-- วัน</div>
-                <div class="space-y-1">
-                    <div id="typeB_start" class="text-[11px] text-slate-300">เริ่ม: -</div>
-                    <div id="typeB_finish" class="text-[11px] text-amber-300">เสร็จ: -</div>
-                </div>
+                <div class="space-y-1"><div id="typeB_start" class="text-[11px] text-slate-300">เริ่ม: -</div><div id="typeB_finish" class="text-[11px] text-amber-300">เสร็จ: -</div></div>
             </div>
-
             <div id="card_typeA2" class="glass-card p-5 border-l-4 border-emerald-500">
-                <h3 class="text-emerald-400 font-bold text-sm uppercase">TYPE A2 ( -- )</h3>
+                <h3 class="text-emerald-400 font-bold text-sm">TYPE A2</h3>
                 <div id="typeA2_days" class="text-2xl font-bold text-white my-2">-- วัน</div>
-                <div class="space-y-1">
-                    <div id="typeA2_start" class="text-[11px] text-slate-300">เริ่ม: -</div>
-                    <div id="typeA2_finish" class="text-[11px] text-emerald-300">เสร็จ: -</div>
-                </div>
+                <div class="space-y-1"><div id="typeA2_start" class="text-[11px] text-slate-300">เริ่ม: -</div><div id="typeA2_finish" class="text-[11px] text-emerald-300">เสร็จ: -</div></div>
             </div>
-
             <div id="card_typeC" class="glass-card p-5 border-l-4 border-red-500">
-                <h3 class="text-red-400 font-bold text-sm uppercase">TYPE C ( -- )</h3>
+                <h3 class="text-red-400 font-bold text-sm">TYPE C</h3>
                 <div id="typeC_days" class="text-2xl font-bold text-white my-2">-- วัน</div>
-                <div class="space-y-1">
-                    <div id="typeC_start" class="text-[11px] text-slate-300">เริ่ม: -</div>
-                    <div id="typeC_finish" class="text-[11px] text-red-300">เสร็จ: -</div>
-                </div>
+                <div class="space-y-1"><div id="typeC_start" class="text-[11px] text-slate-300">เริ่ม: -</div><div id="typeC_finish" class="text-[11px] text-red-300">เสร็จ: -</div></div>
             </div>
         </div>
     </div>
 
     <script>
-        const SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbyEZ84qkH2I6gTZ4c8qhWj8oeS3n0PkgFuS8gbPJAECGuZmM-UxmReIUVmvrRWwgZFy/exec';
-        const GOOGLE_SHEET_URL = 'https://docs.google.com/spreadsheets/d/13WHRfiv_sck1McHVGOm_8BzDhU-sqy80JMIerBt4xRo/edit?gid=0#gid=0';
+        const SCRIPT_URL = 'YOUR_GOOGLE_SCRIPT_URL_HERE'; // ใส่ URL ของ Apps Script
+        const GOOGLE_SHEET_URL = 'YOUR_SHEET_URL_HERE'; // ใส่ URL ของ Google Sheet
 
-        // Set Default Date as Today
         document.getElementById('baseDate').valueAsDate = new Date();
 
-        // Function for Ordinal Number (1st, 2nd, 3rd...)
         function getOrdinal(n) {
-            let s = ["th", "st", "nd", "rd"],
-                v = n % 100;
+            let s = ["th", "st", "nd", "rd"], v = n % 100;
             return n + (s[(v - 20) % 10] || s[v] || s[0]);
         }
 
-        function openGoogleSheet() {
-            window.open(GOOGLE_SHEET_URL, '_blank');
-        }
+        function openGoogleSheet() { window.open(GOOGLE_SHEET_URL, '_blank'); }
 
         async function saveAndCalculate() {
             const baseDateInput = document.getElementById('baseDate').value;
             const currentEOH = parseFloat(document.getElementById('currentEOH').value);
             const avgRate = parseFloat(document.getElementById('avgEOHPerDay').value);
 
-            // Validation
             if (!baseDateInput || isNaN(currentEOH) || isNaN(avgRate) || avgRate <= 0) { 
-                alert("กรุณากรอกข้อมูลให้ครบถ้วนและถูกต้อง"); 
-                return; 
+                alert("กรุณากรอกข้อมูลให้ครบถ้วน"); return; 
             }
 
             const btn = document.getElementById('btnSave');
-            const originalBtnText = btn.innerHTML;
             btn.innerHTML = '<i class="fas fa-spinner fa-spin mr-2"></i> กำลังประมวลผล...';
             btn.disabled = true;
 
-            // Define Base Schedule Loop (Every 36,000 hrs)
             const schedule = [
-                { id: 'typeA1', name: 'TYPE A1', limit: 9000, duration: 8 },
-                { id: 'typeB',  name: 'TYPE B',  limit: 18000, duration: 9 },
-                { id: 'typeA2', name: 'TYPE A2', limit: 27000, duration: 8 },
-                { id: 'typeC',  name: 'TYPE C',  limit: 36000, duration: 37 }
+                { id: 'typeA1', name: 'Type A1', limit: 9000, duration: 8 },
+                { id: 'typeB', name: 'Type B', limit: 18000, duration: 9 },
+                { id: 'typeA2', name: 'Type A2', limit: 27000, duration: 8 },
+                { id: 'typeC', name: 'Type C', limit: 36000, duration: 37 }
             ];
 
             const baseDate = new Date(baseDateInput);
-            let lastFinishDate = null;
-            
-            // Calculate Current Loop Index (0 = 1st Loop, 1 = 2nd Loop...)
+            let resultsData = []; // เก็บข้อมูลเพื่อส่งไป Sheet
             let loopIndex = Math.floor(currentEOH / 36000);
+            let lastFinishDate = null;
 
             schedule.forEach((item, index) => {
                 const cardHeader = document.querySelector(`#card_${item.id} h3`);
@@ -191,28 +124,23 @@
                 const startEl = document.getElementById(`${item.id}_start`);
                 const finishEl = document.getElementById(`${item.id}_finish`);
 
-                // Calculate Actual Limit based on current loop
-                // Example: Loop 0: 9k, 18k... | Loop 1: 45k, 54k...
                 let actualLimit = item.limit + (loopIndex * 36000);
                 let cycleOrdinal = loopIndex + 1;
 
-                // If Current EOH already passed this maintenance in this loop, go to NEXT loop
                 if (currentEOH >= actualLimit) {
                     actualLimit += 36000;
                     cycleOrdinal += 1;
                 }
 
-                // Update Header with Ordinal (e.g., TYPE A1 ( 1st ))
-                cardHeader.innerText = `${item.name} ( ${getOrdinal(cycleOrdinal)} )`;
+                let typeLabel = `${item.name} (${getOrdinal(cycleOrdinal)})`;
+                cardHeader.innerText = typeLabel;
 
                 let startDate;
-                // If it's the first card in calculation or "lastFinishDate" isn't set
                 if (index === 0 || !lastFinishDate) {
                     let daysUntil = Math.floor((actualLimit - currentEOH) / avgRate);
                     startDate = new Date(baseDate);
                     startDate.setDate(baseDate.getDate() + daysUntil);
                 } else {
-                    // Logic: Next maintenance starts after previous one finishes + 9000 hrs interval
                     let daysToRun = Math.floor(9000 / avgRate);
                     startDate = new Date(lastFinishDate);
                     startDate.setDate(lastFinishDate.getDate() + daysToRun);
@@ -220,41 +148,39 @@
 
                 const finishDate = new Date(startDate);
                 finishDate.setDate(startDate.getDate() + item.duration);
+                const diffDays = Math.ceil((startDate.getTime() - baseDate.getTime()) / (1000 * 60 * 60 * 24));
 
-                // Calculate Countdown
-                const diffTime = startDate.getTime() - baseDate.getTime();
-                const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
-
-                // Display UI
                 dayEl.innerText = `${diffDays.toLocaleString()} วัน`;
                 startEl.innerText = "เริ่ม: " + startDate.toLocaleDateString('th-TH');
                 finishEl.innerText = "เสร็จ: " + finishDate.toLocaleDateString('th-TH');
 
-                // Save for next iteration
+                resultsData.push({
+                    type: typeLabel,
+                    start: startDate.toLocaleDateString('th-TH'),
+                    finish: finishDate.toLocaleDateString('th-TH')
+                });
+
                 lastFinishDate = new Date(finishDate);
             });
 
-            // Post Data to Google Sheets
             try {
-                const payload = { 
-                    recordDate: baseDateInput, 
-                    currentEOH: currentEOH, 
-                    avgRate: avgRate 
-                };
-                
+                // ส่งข้อมูลเข้า Sheet โดยส่งผลลัพธ์การพยากรณ์ไปด้วย
                 await fetch(SCRIPT_URL, {
                     method: 'POST',
-                    mode: 'no-cors', 
+                    mode: 'no-cors',
                     headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify(payload)
+                    body: JSON.stringify({
+                        recordDate: baseDateInput,
+                        currentEOH: currentEOH,
+                        avgRate: avgRate,
+                        forecast: resultsData
+                    })
                 });
-                
-                alert("บันทึกและคำนวณรอบถัดไปเรียบร้อยแล้ว!");
+                alert("บันทึกข้อมูลเรียบร้อย!");
             } catch (e) {
-                console.error(e);
-                alert("เกิดข้อผิดพลาดในการเชื่อมต่อ Google Sheets");
+                alert("เกิดข้อผิดพลาด");
             } finally {
-                btn.innerHTML = originalBtnText;
+                btn.innerHTML = '<i class="fas fa-cloud-upload-alt mr-2"></i> บันทึกและพยากรณ์';
                 btn.disabled = false;
             }
         }
